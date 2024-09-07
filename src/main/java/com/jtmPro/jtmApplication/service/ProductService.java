@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +31,29 @@ log.info("product {} is saved",product.getId());
         List<Product> all = productRepository.findAll();
         return all.stream().map(this::mapToProductResponse).toList();
 
+    }
+    public Optional<ProductResponse> getProductId(String id){
+        Product product=productRepository.findById(id).orElse(null);
+        return  Optional.ofNullable(product).map(this::mapToProductResponse);
+
+    }
+public Optional<ProductResponse> updateProduct(String id, ProductRequest productRequest){
+return productRepository.findById(id)
+        .map(product -> {
+            product.setName(productRequest.getName());
+            product.setDescription(productRequest.getDescription());
+            product.setPrice(productRequest.getPrice());
+            productRepository.save(product);
+            return mapToProductResponse(product);
+        });
+
+}
+    public Optional<Void> deleteProduct(String id) {
+        return productRepository.findById(id)
+                .map(product -> {
+                    productRepository.delete(product);
+                    return null;  // Return null because there's no response body for a DELETE operation
+                });
     }
 
     private ProductResponse mapToProductResponse(Product product) {
