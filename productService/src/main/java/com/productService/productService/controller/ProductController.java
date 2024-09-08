@@ -1,9 +1,9 @@
-package com.jtmPro.jtmApplication.controller;
+package com.productService.productService.controller;
 
-import com.jtmPro.jtmApplication.dto.ProductRequest;
-import com.jtmPro.jtmApplication.dto.ProductResponse;
-import com.jtmPro.jtmApplication.repository.ProductRepository;
-import com.jtmPro.jtmApplication.service.ProductService;
+import com.productService.productService.dto.ProductRequest;
+import com.productService.productService.dto.ProductResponse;
+import com.productService.productService.repository.ProductRepository;
+import com.productService.productService.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,25 +20,25 @@ public class ProductController {
     private final ProductService productService;
     private final ProductRepository productRepository;
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct(@RequestBody ProductRequest productRequest){
-productService.createProduct(productRequest);
-
-
+    public void createProduct(@RequestBody ProductRequest productRequest) {
+        productService.createProduct(productRequest);
     }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ProductResponse> getAllProduct(){
-      return productService.getAllProduct();
+    public List<ProductResponse> getAllProduct() {
+        return productService.getAllProduct();
     }
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProductResponse> getProductById(@PathVariable String id) {
         Optional<ProductResponse> productResponse = productService.getProductId(id);
         return productResponse.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponse> updateProduct(
             @PathVariable String id,
@@ -51,17 +51,15 @@ productService.createProduct(productRequest);
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
     @DeleteMapping("/{id}")
-    public Optional<ResponseEntity<Object>> deleteProduct(@PathVariable String id) {
+    public ResponseEntity<Object> deleteProduct(@PathVariable String id) {
         if (id == null || id.isEmpty()) {
-            return Optional.of(ResponseEntity.badRequest().build());
+            return ResponseEntity.badRequest().build();
         }
 
         return productService.deleteProduct(id)
-                .map(deleted -> ResponseEntity.noContent().build()) ;
-
+                .map(deleted -> ResponseEntity.noContent().build())
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
-
-
 }

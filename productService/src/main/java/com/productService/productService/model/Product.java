@@ -1,4 +1,4 @@
-package com.jtmPro.jtmApplication.model;
+package com.productService.productService.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

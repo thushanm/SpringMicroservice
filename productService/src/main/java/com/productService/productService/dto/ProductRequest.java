@@ -1,10 +1,9 @@
-package com.jtmPro.jtmApplication.dto;
+package com.productService.productService.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 import java.math.BigDecimal;
 

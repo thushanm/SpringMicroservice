@@ -1,9 +1,9 @@
-package com.jtmPro.jtmApplication.service;
+package com.productService.productService.service;
 
-import com.jtmPro.jtmApplication.dto.ProductRequest;
-import com.jtmPro.jtmApplication.dto.ProductResponse;
-import com.jtmPro.jtmApplication.model.Product;
-import com.jtmPro.jtmApplication.repository.ProductRepository;
+import com.productService.productService.dto.ProductRequest;
+import com.productService.productService.dto.ProductResponse;
+import com.productService.productService.model.Product;
+import com.productService.productService.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,14 +1,13 @@
-package com.jtmPro.jtmApplication;
+package com.productService.productService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jtmPro.jtmApplication.dto.ProductRequest;
-import com.jtmPro.jtmApplication.repository.ProductRepository;
+import com.productService.productService.dto.ProductRequest;
+import com.productService.productService.repository.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.mapping.Association;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -17,8 +16,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
-import org.testcontainers.shaded.org.checkerframework.checker.compilermsgs.qual.CompilerMessageKey;
 
 import java.math.BigDecimal;
 
@@ -27,15 +24,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Testcontainers
 @AutoConfigureMockMvc
-class JtmApplicationTests {
+class ProductServiceApplicationTests {
 	@Container
-static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:4.4.4");
+	static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:4.4.4");
 	@Autowired
 	private MockMvc mockMvc;
 	@Autowired
 	private ObjectMapper objectMapper;
-    @Autowired
-    private ProductRepository productRepository;
+	@Autowired
+	private ProductRepository productRepository;
 	@DynamicPropertySource
 	static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry){
 		dynamicPropertyRegistry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
@@ -46,10 +43,10 @@ static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:4.4.4");
 		ProductRequest productRequest = getProductRequest();
 		String productRequestString = objectMapper.writeValueAsString(productRequest);
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/product")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(productRequestString))
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(productRequestString))
 				.andExpect(status().isCreated());
-        Assertions.assertEquals(1, productRepository.findAll().size());
+		Assertions.assertEquals(1, productRepository.findAll().size());
 	}
 
 	private ProductRequest getProductRequest() {

@@ -1,4 +1,4 @@
-package com.jtmPro.jtmApplication.dto;
+package com.productService.productService.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
