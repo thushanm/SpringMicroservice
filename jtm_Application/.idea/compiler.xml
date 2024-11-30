@@ -7,12 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="productService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="orderService" target="17" />
+      <module name="productService" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="orderService" options="-parameters" />
       <module name="productService" options="-parameters" />
     </option>
   </component>
