@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="productService" />
         <module name="orderService" />
+        <module name="supplierService" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="orderService" options="-parameters" />
       <module name="productService" options="-parameters" />
+      <module name="supplierService" options="-parameters" />
     </option>
   </component>
 </project>
