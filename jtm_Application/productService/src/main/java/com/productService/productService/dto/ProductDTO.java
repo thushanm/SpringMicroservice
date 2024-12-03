@@ -12,6 +12,6 @@ import lombok.Setter;
 public class ProductDTO {
     private long id;
     private String name;
-    private String address;
-    private String phone;
+    private int qty;
+    private double price;
 }

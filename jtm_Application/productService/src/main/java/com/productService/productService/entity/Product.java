@@ -19,7 +19,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String address;
-    private String phone;
+    private int qty;
+    private double price;
 }
 
